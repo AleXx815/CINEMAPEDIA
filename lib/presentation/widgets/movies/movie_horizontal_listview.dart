@@ -107,9 +107,20 @@ class _Slide extends StatelessWidget {
                 Icons.star_half_outlined,
                 color: Colors.yellow.shade800,
               ),
+              const SizedBox(
+                width: 3,
+              ),
               Text(
                 "${movie.voteAverage}",
-                style: textStyles.bodyMedium,
+                style: textStyles.bodyMedium
+                    ?.copyWith(color: Colors.yellow.shade800),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                "${movie.popularity}",
+                style: textStyles.bodySmall,
               )
             ],
           )

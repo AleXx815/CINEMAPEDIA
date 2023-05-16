@@ -2,7 +2,8 @@ import 'package:cinemapadia/domain/entities/movie.dart';
 import 'package:cinemapadia/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final movieInfoProvider = StateNotifierProvider((ref) {
+final movieInfoProvider =
+    StateNotifierProvider<MovieMapNotifer, Map<String, Movie>>((ref) {
   final movieRepository = ref.watch(movieRepositoryProvider);
   return MovieMapNotifer(getMovie: movieRepository.getMovieById);
 });
@@ -26,7 +27,7 @@ class MovieMapNotifer extends StateNotifier<Map<String, Movie>> {
 
   Future<void> loadMovie(String movieId) async {
     if (state[movieId] != null) return;
-
+    print("Realizando petición http");
     final movie = await getMovie(movieId);
 
     state = {...state, movieId: movie};

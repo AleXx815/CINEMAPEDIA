@@ -126,12 +126,75 @@ class _MovieDetails extends StatelessWidget {
           ),
         ),
 
-        // TODO: MOSTRAR ACTORES
+        _CastByMovie(
+          movieId: movie.id.toString(),
+        ),
 
         const SizedBox(
-          height: 100,
+          height: 10,
         ),
       ],
+    );
+  }
+}
+
+class _CastByMovie extends ConsumerWidget {
+  final String movieId;
+
+  const _CastByMovie({required this.movieId});
+
+  @override
+  Widget build(BuildContext context, ref) {
+    final castByMovie = ref.watch(castByMovieProvider);
+
+    if (castByMovie[movieId] == null) {
+      return const CircularProgressIndicator(strokeWidth: 2);
+    }
+
+    final cast = castByMovie[movieId]!;
+
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: cast.length,
+        itemBuilder: (BuildContext context, index) {
+          final actor = cast[index];
+
+          return Container(
+            padding: const EdgeInsets.all(8.0),
+            width: 135,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    actor.profilePath,
+                    height: 180,
+                    width: 135,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  actor.name,
+                  maxLines: 1,
+                ),
+                Text(
+                  actor.character ?? "",
+                  maxLines: 2,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

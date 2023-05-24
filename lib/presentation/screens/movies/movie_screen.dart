@@ -1,4 +1,5 @@
 import 'package:cinemapadia/presentation/providers/movies/movie_info_provider.dart';
+import 'package:cinemapadia/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,6 +22,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     super.initState();
 
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
+    ref.read(castByMovieProvider.notifier).loadCast(widget.movieId);
   }
 
   @override

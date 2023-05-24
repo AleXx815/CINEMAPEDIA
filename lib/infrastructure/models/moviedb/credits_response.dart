@@ -1,7 +1,7 @@
 class CreditsResponse {
   final int id;
-  final List<Cast> cast;
-  final List<Cast> crew;
+  final List<Actor> cast;
+  final List<Actor> crew;
 
   CreditsResponse({
     required this.id,
@@ -12,8 +12,8 @@ class CreditsResponse {
   factory CreditsResponse.fromJson(Map<String, dynamic> json) =>
       CreditsResponse(
         id: json["id"],
-        cast: List<Cast>.from(json["cast"].map((x) => Cast.fromJson(x))),
-        crew: List<Cast>.from(json["crew"].map((x) => Cast.fromJson(x))),
+        cast: List<Actor>.from(json["cast"].map((x) => Actor.fromJson(x))),
+        crew: List<Actor>.from(json["crew"].map((x) => Actor.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -23,7 +23,7 @@ class CreditsResponse {
       };
 }
 
-class Cast {
+class Actor {
   final bool adult;
   final int gender;
   final int id;
@@ -39,7 +39,7 @@ class Cast {
   final String? department;
   final String? job;
 
-  Cast({
+  Actor({
     required this.adult,
     required this.gender,
     required this.id,
@@ -56,7 +56,7 @@ class Cast {
     this.job,
   });
 
-  factory Cast.fromJson(Map<String, dynamic> json) => Cast(
+  factory Actor.fromJson(Map<String, dynamic> json) => Actor(
         adult: json["adult"],
         gender: json["gender"],
         id: json["id"],
@@ -69,7 +69,7 @@ class Cast {
         character: json["character"],
         creditId: json["credit_id"],
         order: json["order"],
-        department: json["department"]!,
+        department: json["department"],
         job: json["job"],
       );
 
